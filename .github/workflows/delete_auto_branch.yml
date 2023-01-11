@@ -1,0 +1,20 @@
+name: delete auto branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    env:
+      PARENT_REPOSITORY: 'hwany7seo/test_action'
+      CHECKOUT_BRANCH: 'main'
+      PR_AGAINST_BRANCH: 'main'
+      OWNER: 'hwany7seo'
+    steps:
+      - uses: actions/checkout@v2
+      - name: delete auto generated branch
+        shell: bash
+        run: |
+          git branch -r | grep 'autogen/'| cut -c 10- | xargs git push origin --delete
+      
