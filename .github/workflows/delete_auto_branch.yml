@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - name: delete auto generated branch
         shell: bash
         run: |
-          git branch -r | grep 'autogen/'| cut -c 10- | xargs git push origin --delete
+          git branch -r | grep 'autogensubmodule/'| cut -c 10- | xargs git push origin --delete
       
