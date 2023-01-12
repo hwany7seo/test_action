@@ -1,4 +1,4 @@
-name: delete auto branch
+name: temp delete auto branch
 on:
   push:
     branches: [ "main" ]
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: delete auto generated branch
         shell: bash
         run: |
