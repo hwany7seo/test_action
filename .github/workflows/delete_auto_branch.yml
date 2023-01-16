@@ -1,4 +1,4 @@
-name: temp delete auto branch
+name: delete auto branch
 on:
   push:
     branches: [ "main" ]
@@ -14,9 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: delete auto generated branch
         shell: bash
         run: |
-          git branch -r | grep 'autogensubmodule/'| cut -c 10- | xargs git push origin --delete
+          RET=$(echo $(git branch -r | grep 'autogensubmodule/'))
+          if [ -n ${RET} ]; then
+            git branch -r | grep 'autogensubmodule/'| cut -c 10- | xargs git push origin --delete
+          fi
       
